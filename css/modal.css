@@ -1,0 +1,49 @@
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: var(--surface);
+  padding: 30px 25px;
+  border-radius: 12px;
+  text-align: center;
+  min-width: 300px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  animation: fadeSlide 0.2s ease;
+}
+
+@keyframes fadeSlide {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.modal-icon {
+  font-size: 48px;
+  margin-bottom: 12px;
+}
+
+.modal-content h2 {
+  font-size: 22px;
+  margin-bottom: 12px;
+  color: var(--text);
+}
+
+.modal-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.modal-buttons button {
+  min-width: 100px;
+}

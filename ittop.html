@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IT TOP – Колесо фортуны</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/layout.css">
+    <link rel="stylesheet" href="css/controls.css">
+    <link rel="stylesheet" href="css/wheel.css">
+    <link rel="stylesheet" href="css/modal.css">
+    <link rel="icon" href="favicon.svg" type="image/svg+xml">
+</head>
+<body>
+<div class="mobile-block">
+    <p>Please use a computer to access this website!!!</p>
+</div>
+
+<div class="app">
+    <header class="header">
+        <h1 class="title">IT TOP Колесо</h1>
+        <p class="subtitle">Закрытый режим для преподавателя</p>
+    </header>
+
+    <div class="main-layout">
+        <!-- Левая колонка: история + колесо -->
+        <div class="left-column">
+            <div class="history-panel" id="historyPanel">
+                <h3>Последние результаты</h3>
+                <ul id="historyList"></ul>
+            </div>
+            <div class="wheel-section">
+                <div class="wheel-wrapper">
+                    <canvas id="wheelCanvas" width="500" height="500"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Правая колонка: управление -->
+        <div class="right-column">
+            <div class="range-panel">
+                <div class="range-row">
+                    <label>Группа:</label>
+                    <div class="custom-select">
+                        <select id="groupSelect"></select>
+                    </div>
+                </div>
+                <div class="range-row">
+                    <label>Исключения:</label>
+                    <input type="text" id="excludeInput" placeholder="например: 5,8,12">
+                    <button id="resetExclude" class="btn-small">🗑</button>
+                </div>
+                <button id="resetAll" class="btn-secondary">↺ Сброс исключённых</button>
+            </div>
+
+            <div class="controls-panel">
+                <button id="startSpin" class="btn-spin">КРУТИТЬ</button>
+
+                <div class="settings-row">
+                    <div class="setting">
+                        <label>Спинов: <span id="spinsValue">3</span></label>
+                        <input type="range" id="spinsRange" min="1" max="10" value="3" step="1">
+                    </div>
+
+                    <div class="setting speed">
+                        <label>Скорость:</label>
+                        <button data-speed="slow"><img src="assets/images/Slow.png" alt="Медленно"></button>
+                        <button data-speed="normal" class="active"><img src="assets/images/Medium.png" alt="Средне"></button>
+                        <button data-speed="fast"><img src="assets/images/Fast.png" alt="Быстро"></button>
+                    </div>
+
+                    <div class="setting bias-toggle">
+                        <label class="switch-label">
+                            <span>Подкрутка</span>
+                            <div class="toggle-switch">
+                                <input type="checkbox" id="biasEnabled">
+                                <span class="slider"></span>
+                            </div>
+                        </label>
+                        <input type="number" id="biasTargetID" placeholder="ID" disabled class="small-input">
+                    </div>
+
+                    <div class="setting">
+                        <label>
+                            <input type="checkbox" id="soundToggle" checked>
+                            Звук
+                        </label>
+                    </div>
+                </div>
+
+                <a href="index.html" class="btn-back">← Обычный режим</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Модальные окна -->
+<div id="excludeModal" class="modal hidden">
+    <div class="modal-content">
+        <div class="modal-icon">🎯</div>
+        <h2 id="excludeMessage"></h2>
+        <div class="modal-buttons">
+            <button id="excludeYes" class="btn-primary">Да, исключить</button>
+            <button id="excludeNo" class="btn-secondary">Нет, оставить</button>
+        </div>
+    </div>
+</div>
+
+<div id="passwordModal" class="modal hidden">
+    <div class="modal-content">
+        <h2>IT TOP</h2>
+        <p>Введите пароль:</p>
+        <input type="password" id="passwordInput" placeholder="Пароль">
+        <div class="modal-buttons">
+            <button id="confirmPassword" class="btn-primary">Войти</button>
+            <button id="cancelPassword" class="btn-secondary">Отмена</button>
+        </div>
+        <p id="passwordError" class="error-text hidden">Неверный пароль</p>
+    </div>
+</div>
+
+<script type="module" src="js/ittop-app.js"></script>
+</body>
+</html>

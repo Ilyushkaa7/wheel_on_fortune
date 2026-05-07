@@ -1,0 +1,9 @@
+/* ========== ДОПОЛНИТЕЛЬНЫЕ СТИЛИ УПРАВЛЕНИЯ ========== */
+.controls-panel .setting select {
+  min-width: 60px;
+}
+
+/* Hover для всех select */
+select:hover {
+  border-color: rgba(255, 255, 255, 0.4);
+}
