@@ -10,7 +10,7 @@ class AudioService {
     if (this.initialized) return;
     try {
       this.sounds = {
-        spin: new Audio('assets/sounds/spin.mp3'),
+        spin: new Audio('assets/sounds/yakubovich.mp3'),
         tick: new Audio('assets/sounds/click.mp3'),
         win: new Audio('assets/sounds/win.mp3')
       };

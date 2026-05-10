@@ -8,7 +8,8 @@ function getAvailable() {
 function weightedPick(arr) {
   const biasTarget = state.settings.biasEnabled ? state.settings.biasTarget : null;
   if (biasTarget && arr.some(i => i.id === biasTarget)) {
-    return Math.random() < 0.95
+    // Подкрутка 75% (вместо 95%)
+    return Math.random() < 0.75
       ? arr.find(i => i.id === biasTarget)
       : randomPick(arr);
   }

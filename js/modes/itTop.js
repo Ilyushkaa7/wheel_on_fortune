@@ -1,4 +1,4 @@
-const PASSWORD = '1234';
+const PASSWORD = 'ittop2026';
 
 export function requestPassword() {
   return new Promise(resolve => {

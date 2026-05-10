@@ -1,14 +1,14 @@
 export const SPEEDS = {
-  slow: 1,     // количество полных оборотов за 7 сек
-  normal: 5,
-  fast: 10
+  slow:   { rotations: 1,  duration: 7000 },
+  normal: { rotations: 10,  duration: 7000 },
+  fast:   { rotations: 20, duration: 7000 }
 };
 
-export const PASSWORD_IT_TOP = '1234';
+export const PASSWORD_IT_TOP = 'ittop2026';
 
 export const COLORS = [
-  '#e57373', '#f06292', '#ba68c8', '#7986cb', '#64b5f6',
-  '#4fc3f7', '#4dd0e1', '#4db6ac', '#81c784', '#aed581',
-  '#dce775', '#fff176', '#ffd54f', '#ffb74d', '#ff8a65',
-  '#a1887f', '#e0e0e0', '#90a4ae', '#b0bec5', '#cfd8dc'
+  '#80cbc4', '#a5d6a7', '#c5e1a5', '#e6ee9c', '#fff59d',
+  '#ffe082', '#ffcc80', '#ffab91', '#bcaaa4', '#b0bec5',
+  '#90a4ae', '#80cbc4', '#a5d6a7', '#c5e1a5', '#dcedc8',
+  '#f0f4c3', '#f9fbe7', '#ffecb3', '#ffe0b2', '#d7ccc8'
 ];

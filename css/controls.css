@@ -1,9 +1,18 @@
-/* ========== ДОПОЛНИТЕЛЬНЫЕ СТИЛИ УПРАВЛЕНИЯ ========== */
-.controls-panel .setting select {
-  min-width: 60px;
+.setting.bias-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
 }
 
-/* Hover для всех select */
-select:hover {
-  border-color: rgba(255, 255, 255, 0.4);
+.small-input {
+  width: 70px;
+  padding: 6px 8px;
+  border-radius: 10px;
 }
+
+input[type="number"]::-webkit-outer-spin-button,
+input[type="number"]::-webkit-inner-spin-button {
+  opacity: 1;
+}
+
