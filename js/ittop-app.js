@@ -140,6 +140,14 @@ function addHistory(results) {
     if (historyList.children.length > 20) historyList.removeChild(historyList.lastChild);
 }
 
+// Правовая информация
+document.getElementById('btnLegalInfo').addEventListener('click', () => {
+    document.getElementById('legalInfoModal').classList.remove('hidden');
+});
+document.getElementById('closeLegalInfo').addEventListener('click', () => {
+    document.getElementById('legalInfoModal').classList.add('hidden');
+});
+
 async function init() {
     audio.init();
 

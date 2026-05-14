@@ -32,6 +32,10 @@
       <button id="btnNormalMode" class="mode-tab active">Базовый</button>
       <button id="btnITMode" class="mode-tab">IT TOP</button>
     </div>
+    <div class="header-tabs">
+      <button class="mode-tab" id="btnSandbox" title="Песочные часы">⏳ Часы</button>
+      <button class="mode-tab" id="btnLegal" title="Правовая информация">⚖️ Право</button>
+    </div>
   </header>
 
   <div class="main-layout">
@@ -62,7 +66,6 @@
       </div>
     </div>
 
-    <!-- Правая колонка: управление -->
     <div class="column controls-column">
       <div class="glass-panel range-panel" id="panelNormal">
         <div class="mode-switch">
@@ -83,7 +86,7 @@
           <div class="range-row">
             <label>Исключения:</label>
             <input type="text" id="excludeInput" placeholder="5,8,12">
-            <button id="resetExclude" class="btn-small">🗑</button>
+            <button id="resetExclude" class="btn-small">✕</button>
           </div>
         </div>
         <div id="namesInputs" style="display:none;">
@@ -105,9 +108,10 @@
         <div class="range-row">
           <label>Исключения:</label>
           <input type="text" id="excludeInputIT" placeholder="5,8,12">
-          <button id="resetExcludeIT" class="btn-small">🗑</button>
+          <button id="resetExcludeIT" class="btn-small">✕</button>
         </div>
         <button id="resetAllIT" class="btn-secondary full-width">Сброс исключённых</button>
+        <button id="btnLegalInfo" class="btn-secondary full-width" style="margin-top:8px;">⚖️ Правовая информация</button>
       </div>
 
       <div class="glass-panel controls-panel">
@@ -147,7 +151,6 @@
   </div>
 </div>
 
-<!-- Модальные окна -->
 <div id="excludeModal" class="modal hidden">
   <div class="modal-content">
     <h2 id="excludeMessage"></h2>
@@ -171,7 +174,31 @@
   </div>
 </div>
 
-<!-- Выпадающее меню групп (поверх всего) -->
+<div id="legalConsentModal" class="modal hidden">
+  <div class="modal-content">
+    <h2>Согласие преподавателя</h2>
+    <p>Я подтверждаю, что являюсь преподавателем и имею право использовать персональные данные студентов в образовательных целях в соответствии с Федеральным законом от 27.07.2006 № 152-ФЗ «О персональных данных».</p>
+    <label>
+      <input type="checkbox" id="consentCheckbox">
+      Я преподаватель, имею право использовать списки
+    </label>
+    <div class="modal-buttons" style="margin-top:20px;">
+      <button id="consentConfirm" class="btn-primary">Подтверждаю</button>
+      <button id="consentCancel" class="btn-secondary">Отмена</button>
+    </div>
+  </div>
+</div>
+
+<div id="legalInfoModal" class="legal-modal hidden">
+  <div class="legal-modal-content">
+    <button class="legal-modal-close" id="closeLegalInfo">✕</button>
+    <h2>⚖️ Правовая информация</h2>
+    <p>Обработка персональных данных осуществляется в соответствии с Федеральным законом от 27.07.2006 № 152-ФЗ «О персональных данных».</p>
+    <p>Данные студентов (ФИО, группа) используются исключительно в образовательных целях для проведения занятий. Данные не передаются третьим лицам, не публикуются в открытом доступе и не используются для коммерческих целей.</p>
+    <p>Хранение осуществляется локально в рамках репозитория преподавателя. В соответствии со ст. 6 152-ФЗ, согласие субъекта персональных данных не требуется, если обработка необходима для исполнения договора или осуществления образовательной деятельности.</p>
+  </div>
+</div>
+
 <div class="dropdown-overlay" id="groupDropdownOverlay" style="display:none;"></div>
 <div class="dropdown-menu-floating" id="groupDropdownMenuFloating" style="display:none;"></div>
 

@@ -300,7 +300,6 @@
   list-style: none;
   margin: 0;
   padding: 8px 0;
-  /* убрали max-height и overflow-y */
   width: 280px;
 }
 

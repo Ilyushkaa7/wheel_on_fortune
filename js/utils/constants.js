@@ -4,7 +4,7 @@ export const SPEEDS = {
   fast:   { rotations: 20, duration: 7000 }
 };
 
-export const PASSWORD_IT_TOP = 'ittop2026';
+export const PASSWORD_HASH = '4c19783d86a538ad4fbcbf79c7b4944abe27f015075a9c6a854f97fc66d58ec5';
 
 export const COLORS = [
   '#80cbc4', '#a5d6a7', '#c5e1a5', '#e6ee9c', '#fff59d',

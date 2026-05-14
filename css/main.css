@@ -20,6 +20,11 @@
   --accent-light: #43a047;
   --danger: #c62828;
   --transition: 0.2s ease;
+  --sand: #c2a366;
+  --sand-dark: #a68b4b;
+  --sand-light: #d4b87a;
+  --wood: #8b6f47;
+  --wood-dark: #6b4f2f;
 }
 
 body {
@@ -133,7 +138,6 @@ select {
   -webkit-appearance: none;
   -moz-appearance: none;
   
-  /* Кастомная стрелка */
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%232e7d32' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
   background-repeat: no-repeat;
   background-position: right 14px center;
@@ -151,7 +155,6 @@ select:focus {
   box-shadow: 0 0 0 3px rgba(46,125,50,0.2), 0 8px 24px rgba(0,0,0,0.08);
 }
 
-/* Стилизация option */
 select option {
   background: #e8f5e9;
   color: var(--glass-text);
@@ -167,13 +170,11 @@ select option:checked {
   color: white !important;
 }
 
-/* Для Firefox */
 select {
   scrollbar-width: thin;
   scrollbar-color: var(--accent) rgba(255,255,255,0.2);
 }
 
-/* Для Webkit в выпадающем списке */
 select::-webkit-scrollbar {
   width: 6px;
 }
@@ -213,7 +214,7 @@ select::-webkit-scrollbar-thumb {
 }
 .btn-spin:disabled { opacity: 0.6; cursor: not-allowed; }
 
-.btn-small { padding: 6px 10px; }
+.btn-small { padding: 10px 12px; line-height: 1; font-size: 14px; border-radius: 12px; }
 .full-width { width: 100%; }
 
 .hidden { display: none !important; }
@@ -271,4 +272,106 @@ input[type="range"]::-webkit-slider-thumb {
   border-radius: 50%;
   cursor: pointer;
   border: 2px solid white;
+}
+
+/* Кнопки хедера */
+.header-actions {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+  margin-left: 8px;
+}
+
+.btn-icon {
+  width: 42px;
+  height: 42px;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 14px;
+  font-size: 20px;
+  line-height: 1;
+  background: rgba(255,255,255,0.25);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid var(--glass-border);
+  transition: all 0.2s ease;
+}
+.btn-icon:hover {
+  background: rgba(255,255,255,0.45);
+}
+.btn-icon img {
+  width: 24px;
+  height: 24px;
+  display: block;
+}
+
+/* Модальное окно правовой информации */
+.legal-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.3);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.legal-modal-content {
+    background: rgba(255, 255, 255, 0.35);
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    padding: 35px 35px 30px;
+    border-radius: 28px;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: 0 25px 50px rgba(0,0,0,0.15), inset 0 0 15px rgba(255,255,255,0.5);
+    animation: fadeSlide 0.3s ease;
+    position: relative;
+}
+
+.legal-modal-content h2 {
+    font-size: 22px;
+    margin-bottom: 16px;
+    color: var(--glass-text);
+}
+
+.legal-modal-content p {
+    color: var(--glass-text-secondary);
+    margin-bottom: 14px;
+    line-height: 1.6;
+    font-size: 14px;
+}
+
+.legal-modal-close {
+    position: absolute;
+    top: 16px;
+    right: 20px;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+    border-radius: 50%;
+    border: 1px solid var(--glass-border);
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    color: var(--glass-text);
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s;
+    line-height: 1;
+}
+.legal-modal-close:hover {
+    background: rgba(255,255,255,0.5);
+    border-color: var(--accent);
 }

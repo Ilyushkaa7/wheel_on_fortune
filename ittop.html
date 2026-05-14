@@ -48,9 +48,10 @@
                 <div class="range-row">
                     <label>Исключения:</label>
                     <input type="text" id="excludeInput" placeholder="например: 5,8,12">
-                    <button id="resetExclude" class="btn-small">🗑</button>
+                    <button id="resetExclude" class="btn-small">✕</button>
                 </div>
                 <button id="resetAll" class="btn-secondary">Сброс исключённых</button>
+                <button id="btnLegalInfo" class="btn-secondary full-width" style="margin-top:8px;">⚖️ Правовая информация</button>
             </div>
 
             <div class="controls-panel">
@@ -115,6 +116,31 @@
             <button id="cancelPassword" class="btn-secondary">Отмена</button>
         </div>
         <p id="passwordError" class="error-text hidden">Неверный пароль</p>
+    </div>
+</div>
+
+<div id="legalConsentModal" class="modal hidden">
+    <div class="modal-content">
+        <h2>Согласие преподавателя</h2>
+        <p>Я подтверждаю, что являюсь преподавателем и имею право использовать персональные данные студентов в образовательных целях в соответствии с Федеральным законом от 27.07.2006 № 152-ФЗ «О персональных данных».</p>
+        <label>
+            <input type="checkbox" id="consentCheckbox">
+            Я преподаватель, имею право использовать списки
+        </label>
+        <div class="modal-buttons" style="margin-top:20px;">
+            <button id="consentConfirm" class="btn-primary">Подтверждаю</button>
+            <button id="consentCancel" class="btn-secondary">Отмена</button>
+        </div>
+    </div>
+</div>
+
+<div id="legalInfoModal" class="modal hidden">
+    <div class="modal-content">
+        <h2>Правовая информация</h2>
+        <p>Обработка персональных данных студентов осуществляется в соответствии с Федеральным законом от 27.07.2006 № 152-ФЗ «О персональных данных». Данные используются исключительно в образовательных целях, не распространяются третьим лицам и хранятся локально на устройстве преподавателя.</p>
+        <div class="modal-buttons">
+            <button id="closeLegalInfo" class="btn-secondary">Закрыть</button>
+        </div>
     </div>
 </div>
 
