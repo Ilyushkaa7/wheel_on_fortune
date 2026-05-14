@@ -67,6 +67,7 @@ btnIT.addEventListener('click', async () => {
   if (granted) setMode('it');
 });
 
+// --- Сборка списка элементов ---
 function buildItemsNormal() {
   const mode = document.querySelector('input[name="inputMode"]:checked').value;
   if (mode === 'range') {
@@ -149,6 +150,7 @@ function updateUI() {
   }
 }
 
+// Вероятность
 function updateProbability() {
   const active = getActiveItems();
   const total = active.length;
@@ -169,6 +171,7 @@ function updateProbability() {
   probabilityBlock.innerHTML = html;
 }
 
+// Слушатели нормального режима
 modeRadios.forEach(r => r.addEventListener('change', () => {
   rangeInputs.style.display = r.value === 'range' ? 'block' : 'none';
   namesInputs.style.display = r.value === 'names' ? 'block' : 'none';
@@ -200,6 +203,7 @@ resetAllBtn.addEventListener('click', () => {
   updateUI();
 });
 
+// IT режим
 excludeInputIT.addEventListener('input', () => {
   clearTimeout(debounce);
   debounce = setTimeout(updateUI, 300);
@@ -215,6 +219,7 @@ resetAllIT.addEventListener('click', () => {
   updateProbability();
 });
 
+// Общие настройки
 spinsRange.addEventListener('input', () => {
   state.settings.spinsPerSeries = parseInt(spinsRange.value);
   spinsValue.textContent = spinsRange.value;
@@ -241,6 +246,7 @@ soundToggle.addEventListener('change', () => {
   audio.setEnabled(soundToggle.checked);
 });
 
+// Скорость
 document.querySelectorAll('.speed-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     state.settings.speed = btn.dataset.speed;
@@ -249,6 +255,7 @@ document.querySelectorAll('.speed-btn').forEach(btn => {
   });
 });
 
+// Старт вращения
 async function handleStart() {
   if (!getActiveItems().length) {
     alert('Нет доступных номеров');
@@ -294,34 +301,55 @@ function addHistory(results) {
   if (historyList.children.length > 20) historyList.removeChild(historyList.lastChild);
 }
 
-// Правовая информация в хедере
+// ========== КНОПКИ В ХЕДЕРЕ ==========
+
+// Песочные часы
+const btnSandbox = document.getElementById('btnSandbox');
+if (btnSandbox) {
+  btnSandbox.addEventListener('click', () => {
+    window.open('sandbox.html', '_blank');
+  });
+}
+
+// Правовая информация
 const legalModal = document.getElementById('legalInfoModal');
-document.getElementById('btnLegal').addEventListener('click', () => {
-  legalModal.classList.remove('hidden');
-});
-document.getElementById('closeLegalInfo').addEventListener('click', () => {
-  legalModal.classList.add('hidden');
-});
-legalModal.addEventListener('click', (e) => {
-  if (e.target === legalModal) legalModal.classList.add('hidden');
-});
+const btnLegal = document.getElementById('btnLegal');
+const closeLegalInfo = document.getElementById('closeLegalInfo');
+const btnLegalInfo = document.getElementById('btnLegalInfo');
+
+function openLegalModal() {
+  if (legalModal) legalModal.classList.remove('hidden');
+}
+
+function closeLegalModal() {
+  if (legalModal) legalModal.classList.add('hidden');
+}
+
+if (btnLegal) {
+  btnLegal.addEventListener('click', openLegalModal);
+}
+
+if (btnLegalInfo) {
+  btnLegalInfo.addEventListener('click', openLegalModal);
+}
+
+if (closeLegalInfo) {
+  closeLegalInfo.addEventListener('click', closeLegalModal);
+}
+
+if (legalModal) {
+  legalModal.addEventListener('click', (e) => {
+    if (e.target === legalModal) closeLegalModal();
+  });
+}
+
 document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape' && !legalModal.classList.contains('hidden')) {
-    legalModal.classList.add('hidden');
+  if (e.key === 'Escape' && legalModal && !legalModal.classList.contains('hidden')) {
+    closeLegalModal();
   }
 });
 
-// Кнопка правовой информации в IT-панели
-document.getElementById('btnLegalInfo').addEventListener('click', () => {
-  legalModal.classList.remove('hidden');
-});
-
-// Кнопка песочных часов
-document.getElementById('btnSandbox').addEventListener('click', () => {
-  window.open('sandbox.html', '_blank');
-});
-
-// Инициализация
+// ========== ИНИЦИАЛИЗАЦИЯ ==========
 async function init() {
   audio.init();
   try {
