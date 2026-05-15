@@ -14,6 +14,7 @@ export function requestPassword() {
     const confirm = document.getElementById('confirmPassword');
     const cancel = document.getElementById('cancelPassword');
     const error = document.getElementById('passwordError');
+    const checkbox = document.getElementById('consentCheckboxIT');
 
     function close(val) {
       modal.classList.add('hidden');
@@ -24,36 +25,14 @@ export function requestPassword() {
     input.value = '';
     input.focus();
     error.classList.add('hidden');
+    checkbox.checked = false;
 
     confirm.onclick = async () => {
+      if (!checkbox.checked) return;
+
       const enteredHash = await sha256(input.value);
       if (enteredHash === PASSWORD_HASH) {
-        // Проверка согласия
-        if (localStorage.getItem('itop_consent') === 'true') {
-          close(true);
-        } else {
-          // Показать окно согласия
-          const consentModal = document.getElementById('legalConsentModal');
-          const consentCheckbox = document.getElementById('consentCheckbox');
-          const consentConfirm = document.getElementById('consentConfirm');
-          consentCheckbox.checked = false;
-          consentModal.classList.remove('hidden');
-          consentConfirm.onclick = () => {
-            if (consentCheckbox.checked) {
-              localStorage.setItem('itop_consent', 'true');
-              consentModal.classList.add('hidden');
-              close(true);
-            } else {
-              alert('Необходимо подтвердить согласие');
-            }
-          };
-          // отмена согласия – вернуться к паролю
-          const consentCancel = document.getElementById('consentCancel');
-          consentCancel.onclick = () => {
-            consentModal.classList.add('hidden');
-            close(false);
-          };
-        }
+        close(true);
       } else {
         error.classList.remove('hidden');
         input.value = '';
@@ -62,9 +41,14 @@ export function requestPassword() {
     };
 
     cancel.onclick = () => close(false);
+
     input.onkeydown = (e) => {
       if (e.key === 'Enter') confirm.onclick();
       if (e.key === 'Escape') close(false);
     };
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) close(false);
+    });
   });
 }

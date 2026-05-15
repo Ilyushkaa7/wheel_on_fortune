@@ -33,8 +33,7 @@
       <button id="btnITMode" class="mode-tab">IT TOP</button>
     </div>
     <div class="header-tabs">
-      <button class="mode-tab" id="btnSandbox" title="Песочные часы">⏳ Часы</button>
-      <button class="mode-tab" id="btnLegal" title="Правовая информация">⚖️ Право</button>
+      <button class="mode-tab" id="btnLegal" title="Правовая информация">Право</button>
     </div>
   </header>
 
@@ -111,7 +110,6 @@
           <button id="resetExcludeIT" class="btn-small">✕</button>
         </div>
         <button id="resetAllIT" class="btn-secondary full-width">Сброс исключённых</button>
-        <button id="btnLegalInfo" class="btn-secondary full-width" style="margin-top:8px;">⚖️ Правовая информация</button>
       </div>
 
       <div class="glass-panel controls-panel">
@@ -162,29 +160,19 @@
 </div>
 
 <div id="passwordModal" class="modal hidden">
-  <div class="modal-content">
+  <div class="modal-content legal-consent">
     <h2>IT TOP</h2>
-    <p>Введите пароль:</p>
+    <p class="legal-text">Введите пароль:</p>
     <input type="password" id="passwordInput" placeholder="Пароль">
+    <p id="passwordError" class="error-text hidden">Неверный пароль</p>
+    <label class="consent-label">
+      <input type="checkbox" id="consentCheckboxIT">
+      <span class="checkmark"></span>
+      <span class="consent-text">Я преподаватель, соглашаюсь с <a href="legal.html" target="_blank" class="legal-link">лицензионным соглашением</a></span>
+    </label>
     <div class="modal-buttons">
       <button id="confirmPassword" class="btn-primary">Войти</button>
       <button id="cancelPassword" class="btn-secondary">Отмена</button>
-    </div>
-    <p id="passwordError" class="error-text hidden">Неверный пароль</p>
-  </div>
-</div>
-
-<div id="legalConsentModal" class="modal hidden">
-  <div class="modal-content">
-    <h2>Согласие преподавателя</h2>
-    <p>Я подтверждаю, что являюсь преподавателем и имею право использовать персональные данные студентов в образовательных целях в соответствии с Федеральным законом от 27.07.2006 № 152-ФЗ «О персональных данных».</p>
-    <label>
-      <input type="checkbox" id="consentCheckbox">
-      Я преподаватель, имею право использовать списки
-    </label>
-    <div class="modal-buttons" style="margin-top:20px;">
-      <button id="consentConfirm" class="btn-primary">Подтверждаю</button>
-      <button id="consentCancel" class="btn-secondary">Отмена</button>
     </div>
   </div>
 </div>
@@ -192,10 +180,11 @@
 <div id="legalInfoModal" class="legal-modal hidden">
   <div class="legal-modal-content">
     <button class="legal-modal-close" id="closeLegalInfo">✕</button>
-    <h2>⚖️ Правовая информация</h2>
-    <p>Обработка персональных данных осуществляется в соответствии с Федеральным законом от 27.07.2006 № 152-ФЗ «О персональных данных».</p>
-    <p>Данные студентов (ФИО, группа) используются исключительно в образовательных целях для проведения занятий. Данные не передаются третьим лицам, не публикуются в открытом доступе и не используются для коммерческих целей.</p>
-    <p>Хранение осуществляется локально в рамках репозитория преподавателя. В соответствии со ст. 6 152-ФЗ, согласие субъекта персональных данных не требуется, если обработка необходима для исполнения договора или осуществления образовательной деятельности.</p>
+    <h2>Правовая информация</h2>
+    <p><strong>Федеральный закон от 27.07.2006 № 152-ФЗ «О персональных данных»</strong></p>
+    <p>Настоящий сервис используется исключительно в образовательных целях. Все данные (имена и инициалы студентов) не являются персональными данными в смысле 152-ФЗ, так как не позволяют однозначно идентифицировать физическое лицо без дополнительной информации.</p>
+    <p>Данные не передаются третьим лицам, не используются в коммерческих целях и хранятся локально в рамках учебного процесса. Использование сервиса регулируется внутренними правилами образовательного учреждения.</p>
+    <p>Согласно ст. 6 152-ФЗ, обработка персональных данных допускается без согласия субъекта, если она осуществляется в целях исполнения договора, стороной которого является субъект, либо для осуществления образовательной деятельности.</p>
   </div>
 </div>
 
