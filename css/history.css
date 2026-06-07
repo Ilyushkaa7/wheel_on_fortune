@@ -1,0 +1,82 @@
+/* Заголовок истории */
+.history-panel h3 {
+  margin: 0 0 16px 0;
+  padding: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--glass-text);
+  flex-shrink: 0; /* заголовок не сжимается */
+}
+
+/* Контейнер списка – ТОЛЬКО ОН скроллится */
+#historyList {
+  flex: 1;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  min-height: 0; /* важно для flex-скролла */
+}
+
+/* Стилизация скроллбара */
+#historyList::-webkit-scrollbar {
+  width: 6px;
+}
+
+#historyList::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+  margin: 4px 0;
+}
+
+#historyList::-webkit-scrollbar-thumb {
+  background: rgba(46, 125, 50, 0.3);
+  border-radius: 3px;
+  transition: background 0.2s;
+}
+
+#historyList::-webkit-scrollbar-thumb:hover {
+  background: rgba(46, 125, 50, 0.5);
+}
+
+/* Firefox */
+#historyList {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(46, 125, 50, 0.3) rgba(255, 255, 255, 0.2);
+}
+
+/* Карточка записи */
+.history-entry {
+  padding: 10px 14px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  border-left: 3px solid var(--accent);
+  color: var(--glass-text);
+  font-size: 14px;
+  line-height: 1.4;
+  flex-shrink: 0; /* не сжимаем карточки */
+  transition: background 0.2s;
+}
+
+.history-entry:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.history-entry .entry-time {
+  color: var(--glass-text-secondary);
+  font-size: 12px;
+  display: block;
+  margin-bottom: 2px;
+}
+
+/* Пустое состояние */
+.history-empty {
+  color: var(--glass-text-secondary);
+  font-style: italic;
+  text-align: center;
+  padding: 20px;
+  flex-shrink: 0;
+}
