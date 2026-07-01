@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Колесо фортуны - WHEELG</title>
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/layout.css">
+  <link rel="stylesheet" href="css/controls.css">
+  <link rel="stylesheet" href="css/wheel.css">
+  <link rel="stylesheet" href="css/modal.css">
+  <link rel="stylesheet" href="css/history.css">
+  <link rel="icon" href="assets/images/favicon.svg" type="image/svg+xml">
+</head>
+<body>
+<div class="mobile-block">
+  <p>Please use a computer to access this website!!!</p>
+</div>
+
+<div class="app">
+  <header class="app-header">
+    <div class="header-logo">
+      <video autoplay loop muted playsinline>
+        <source src="assets/images/logovideo.mp4" type="video/mp4">
+      </video>
+    </div>
+    <div class="header-info">
+      <h1 class="header-title">Колесо фортуны WHEELG</h1>
+      <p class="header-subtitle">Базовый режим</p>
+    </div>
+  </header>
+
+  <div class="main-layout">
+    <div class="column history-column">
+      <div class="glass-panel history-panel">
+        <h3>Последние результаты</h3>
+        <ul id="historyList"></ul>
+      </div>
+    </div>
+
+    <div class="column wheel-column">
+      <div class="wheel-section">
+        <div class="wheel-wrapper">
+          <canvas id="wheelCanvas" width="600" height="600"></canvas>
+        </div>
+        <div class="speed-controls">
+          <span>Скорость:</span>
+          <button data-speed="slow" class="speed-btn" title="Медленно">
+            <img src="assets/images/Slow.svg" alt="Медленно" width="48" height="48">
+          </button>
+          <button data-speed="normal" class="speed-btn active" title="Средне">
+            <img src="assets/images/Medium.svg" alt="Средне" width="48" height="48">
+          </button>
+          <button data-speed="fast" class="speed-btn" title="Быстро">
+            <img src="assets/images/Fast.svg" alt="Быстро" width="48" height="48">
+          </button>
+          <button data-speed="thrill" class="speed-btn speed-btn-text" title="Азартно">?</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="column controls-column">
+      <div class="glass-panel range-panel">
+        <div class="mode-switch">
+          <label class="radio-label">
+            <input type="radio" name="inputMode" value="range" checked> Диапазон
+          </label>
+          <label class="radio-label">
+            <input type="radio" name="inputMode" value="names"> Имена
+          </label>
+        </div>
+        <div id="rangeInputs">
+          <div class="range-row">
+            <label>От и до:</label>
+            <input type="number" id="rangeMin" value="1" min="1" max="67" placeholder="от">
+            <span>–</span>
+            <input type="number" id="rangeMax" value="10" min="1" max="67" placeholder="до">
+          </div>
+          <div class="range-row">
+            <label>Исключения:</label>
+            <input type="text" id="excludeInput" placeholder="5,8,12">
+            <button id="resetExclude" class="btn-small">✕</button>
+          </div>
+        </div>
+        <div id="namesInputs" style="display:none;">
+          <div class="range-row">
+            <label>Имена:</label>
+            <input type="text" id="namesInput" placeholder="Иванов Иван, Петров Пётр...">
+          </div>
+        </div>
+        <button id="resetAll" class="btn-secondary full-width">Стандарт</button>
+      </div>
+
+      <div class="glass-panel import-panel">
+        <button id="openImportModal" class="btn-import full-width">
+          <span class="btn-import-icon">+</span>
+          <span>Загрузить список</span>
+        </button>
+      </div>
+
+      <div class="glass-panel controls-panel">
+        <button id="startSpin" class="btn-spin">КРУТИТЬ</button>
+
+        <div class="settings-row">
+          <div class="setting">
+            <label>Спинов: <span id="spinsValue">1</span></label>
+            <input type="range" id="spinsRange" min="1" max="10" value="1" step="1">
+          </div>
+
+          <div class="setting bias-toggle">
+            <label class="switch-label">
+              <span>Подкрутка</span>
+              <div class="toggle-switch">
+                <input type="checkbox" id="biasEnabled">
+                <span class="slider"></span>
+              </div>
+            </label>
+            <input type="number" id="biasTargetID" placeholder="ID" disabled class="small-input" min="1">
+          </div>
+
+          <div class="setting">
+            <label class="switch-label">
+              <span>Звук</span>
+              <div class="toggle-switch">
+                <input type="checkbox" id="soundToggle" checked>
+                <span class="slider"></span>
+              </div>
+            </label>
+          </div>
+
+          <div id="probabilityBlock" class="probability-note"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="excludeModal" class="modal hidden">
+  <div class="modal-content">
+    <h2 id="excludeMessage"></h2>
+    <div class="modal-buttons">
+      <button id="excludeYes" class="btn-primary">Да, исключить</button>
+      <button id="excludeNo" class="btn-secondary">Нет, оставить</button>
+    </div>
+  </div>
+</div>
+
+<div id="importModal" class="modal hidden">
+  <div class="modal-content import-modal-content">
+    <h2>Загрузить список</h2>
+    <p>Выберите JSON или TXT файл со списком участников.</p>
+    <input type="file" id="listFileInput" class="native-file-input" accept=".json,.txt,application/json,text/plain">
+    <label for="listFileInput" class="file-picker">
+      <span class="file-picker-icon">+</span>
+      <span class="file-picker-text">
+        <strong>Выбрать файл</strong>
+        <small id="selectedFileName">Файл не выбран</small>
+      </span>
+    </label>
+    <div class="import-example">
+      <strong>Пример TXT:</strong>
+      <pre>Иван Иванов
+Мария Петрова
+Алексей Сидоров</pre>
+      <strong>Пример JSON:</strong>
+      <pre>[
+  "Иван Иванов",
+  "Мария Петрова",
+  "Алексей Сидоров"
+]</pre>
+    </div>
+    <p id="importError" class="error-text hidden"></p>
+    <div class="modal-buttons">
+      <button id="applyImport" class="btn-primary">Загрузить</button>
+      <button id="cancelImport" class="btn-secondary">Отмена</button>
+    </div>
+  </div>
+</div>
+
+<script type="module" src="js/app.js"></script>
+</body>
+</html>
