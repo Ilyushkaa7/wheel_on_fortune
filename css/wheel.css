@@ -1,15 +1,36 @@
 .wheel-wrapper {
   position: relative;
-  display: inline-block;
+  display: grid;
+  place-items: center;
+  width: clamp(280px, 44vw, 600px);
+  max-width: calc(100vw - 32px);
+  aspect-ratio: 1;
+}
+
+.wheel-section {
+  width: 100%;
+  display: grid;
+  justify-items: center;
 }
 
 #wheelCanvas {
   border-radius: 50%;
   background: transparent;
   box-shadow: 0 0 0 2px rgba(255,255,255,0.3), 0 20px 40px rgba(0,0,0,0.08);
-  max-width: 600px;
-  max-height: 600px;
   width: 100%;
-  height: auto;
-  /* убрали transform при hover */
+  height: 100%;
+  display: block;
+  touch-action: manipulation;
+}
+
+@media (max-width: 1100px) {
+  .wheel-wrapper {
+    width: min(600px, calc(100vw - 32px));
+  }
+}
+
+@media (max-width: 480px) {
+  .wheel-wrapper {
+    width: min(360px, calc(100vw - 24px));
+  }
 }

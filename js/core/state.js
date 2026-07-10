@@ -3,7 +3,7 @@ export const state = {
   gameExcluded: new Set(),
   settings: {
     speed: 'normal',
-    spinsPerSeries: 3,
+    spinsPerSeries: 1,
     biasEnabled: false,
     biasTarget: null,   // ID для подкрутки
     soundEnabled: true

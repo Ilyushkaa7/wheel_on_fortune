@@ -86,17 +86,17 @@ function setNamedItems(names) {
 }
 
 function parseNumberList(raw) {
-    return raw
+    return [...new Set(raw
         .split(',')
         .map(s => parseInt(s.trim()))
-        .filter(n => !isNaN(n));
+        .filter(n => !isNaN(n) && n >= 1 && n <= 67))];
 }
 
 function parseInlineNames(raw) {
-    return raw
+    return uniqueNames(raw
         .split(',')
         .map(s => s.trim())
-        .filter(Boolean);
+        .filter(Boolean));
 }
 
 function updateProbability() {
@@ -279,10 +279,10 @@ function parseListFile(text, fileName) {
         return normalizeImportedList(JSON.parse(cleanText));
     }
 
-    return cleanText
+    return uniqueNames(cleanText
         .split(/[\r\n,;]+/)
         .map(cleanName)
-        .filter(Boolean);
+        .filter(Boolean));
 }
 
 function normalizeImportedList(data) {
@@ -292,7 +292,7 @@ function normalizeImportedList(data) {
         throw new Error('JSON должен быть массивом или объектом с полем items.');
     }
 
-    return list
+    return uniqueNames(list
         .map((item) => {
             if (typeof item === 'string') {
                 return cleanName(item);
@@ -304,7 +304,7 @@ function normalizeImportedList(data) {
 
             return '';
         })
-        .filter(Boolean);
+        .filter(Boolean));
 }
 
 function cleanName(value) {
@@ -321,10 +321,14 @@ function showImportError(message) {
 }
 
 async function handleStart() {
-    if (!getActiveItems().length) {
-        alert('Нет доступных номеров');
+    const activeCount = getActiveItems().length;
+
+    if (!activeCount) {
+        alert('Нет доступных секторов');
         return;
     }
+
+    const spinsCount = Math.min(state.settings.spinsPerSeries, activeCount);
 
     startBtn.disabled = true;
 
@@ -334,7 +338,7 @@ async function handleStart() {
                 audio.play('spin');
                 return spinToItem(item);
             },
-            state.settings.spinsPerSeries
+            spinsCount
         );
 
         drawWheel();
@@ -363,7 +367,12 @@ async function handleStart() {
 startBtn.addEventListener('click', handleStart);
 
 function addHistory(results) {
+    historyList
+        .querySelectorAll('.history-empty')
+        .forEach((item) => item.remove());
+
     const li = document.createElement('li');
+    li.className = 'history-entry';
 
     const itemsStr = results
         .map(r => {
@@ -383,6 +392,31 @@ function addHistory(results) {
 function init() {
     audio.init();
     buildItems();
+    updateHistoryEmptyState();
 }
 
 document.addEventListener('DOMContentLoaded', init);
+
+function uniqueNames(names) {
+    const seen = new Set();
+
+    return names.filter((name) => {
+        const key = name.toLowerCase();
+
+        if (seen.has(key)) {
+            return false;
+        }
+
+        seen.add(key);
+        return true;
+    });
+}
+
+function updateHistoryEmptyState() {
+    if (historyList.children.length) return;
+
+    const li = document.createElement('li');
+    li.className = 'history-empty';
+    li.textContent = 'Пока нет результатов';
+    historyList.appendChild(li);
+}

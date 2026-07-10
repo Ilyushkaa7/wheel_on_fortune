@@ -35,15 +35,48 @@ export function drawWheel() {
     ctx.save();
     ctx.translate(tx, ty);
     ctx.rotate(mid + Math.PI/2);
-    ctx.font = 'bold 20px "Segoe UI"';
+    const label = item.label || item.id.toString();
+    const fontSize = getLabelFontSize(items.length, label);
+
+    ctx.font = `bold ${fontSize}px "Segoe UI"`;
     ctx.fillStyle = '#1e293b';
     ctx.textAlign = 'center';
     ctx.textBaseline = 'middle';
-    const label = item.label || item.id.toString();
-    ctx.fillText(label, 0, 0);
+    ctx.fillText(fitLabel(label, getLabelMaxWidth(items.length)), 0, 0);
     ctx.restore();
   });
   drawPointer();
+}
+
+function getLabelFontSize(count, label) {
+  if (count > 36) return 12;
+  if (count > 24) return 14;
+  if (count > 14) return 16;
+  if (String(label).length > 18) return 15;
+  return 20;
+}
+
+function getLabelMaxWidth(count) {
+  if (count > 36) return 82;
+  if (count > 24) return 108;
+  if (count > 14) return 138;
+  return 176;
+}
+
+function fitLabel(label, maxWidth) {
+  const text = String(label);
+
+  if (ctx.measureText(text).width <= maxWidth) {
+    return text;
+  }
+
+  let fitted = text;
+
+  while (fitted.length > 3 && ctx.measureText(`${fitted}...`).width > maxWidth) {
+    fitted = fitted.slice(0, -1);
+  }
+
+  return `${fitted.trim()}...`;
 }
 
 function drawPointer() {
